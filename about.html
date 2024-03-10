@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>GevStack - File upload Dropzone</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <style>
+        * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --primary: #a80038;
+    --white: #fff;
+    --background: #F8F8FF;
+    --gray: #D3D3D3;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+}
+
+        body {
+            background-image: url('behind dropzone.jpg'); /* Replace 'background.jpg' with your image file path */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height of the background to fill the viewport */
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .content {
+            background-color: rgba(255, 255, 255, 0.5); /* Add a semi-transparent white background to improve text readability */
+            padding: 20px;
+            border-radius: 10px;
+        }
+.dropzone-box {
+    color: var(--primary);
+    border-radius: 2rem;
+    padding: 2rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 36rem;
+    width: 100%;
+    background-color: var(--white);
+}
+
+.dropzone-box h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.dropzone-area {
+    padding: 1rem;
+    position: relative;
+    margin-top: 1rem;
+    min-height: 16rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px dashed var(--primary);
+    border-radius: 1rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.dropzone-area [type="file"] {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.dropzone-area .file-upload-icon svg {
+    height: 5rem;
+    width: 5rem;
+    margin-bottom: 0.5rem;
+    stroke: var(--primary);
+}
+
+.dropzone--over {
+    border-style: solid;
+    background-color: var(--background);
+}
+
+.dropzone-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--gray);
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.dropzone-actions button {
+    flex-grow: 1;
+    min-height: 3rem;
+    font-size: 1.2rem;
+}
+
+.dropzone-actions button:hover {
+    text-decoration: underline;
+}
+
+.dropzone-actions button[type='reset'] {
+    background-color: transparent;
+    border: 1px solid var(--gray);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.dropzone-actions button[type='submit'] {
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <form class="dropzone-box">
+        <h2>Upload and attach files</h2>
+        <p>
+            Attach files to this project
+        </p>
+        <div class="dropzone-area">
+            <div class="file-upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                </svg>
+            </div>
+            <p>Click to upload or drag and drop</p>
+            <input type="file" required id="upload-file" name="uploaded-file">
+            <p class="message">No Files Selected</p>
+        </div>
+        <div class="dropzone-actions">
+            <button type="button" onclick="cancelUpload()">
+                Cancel
+            </button>
+            <button id="submit-button" type="submit"><li><a href="nextloading.html">Next</a></li>
+            </button>
+        </div>
+    </form>
+
+    <script>function cancelUpload() {
+            window.location.href = 'index%20(1).html#';
+        }const dropzoneBox = document.getElementsByClassName("dropzone-box")[0];
+
+        const inputFiles = document.querySelectorAll(
+          ".dropzone-area input[type='file']"
+        );
+        
+        const inputElement = inputFiles[0];
+        
+        const dropZoneElement = inputElement.closest(".dropzone-area");
+        
+        inputElement.addEventListener("change", (e) => {
+          if (inputElement.files.length) {
+            updateDropzoneFileList(dropZoneElement, inputElement.files[0]);
+          }
+        });
+        
+        dropZoneElement.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dropZoneElement.classList.add("dropzone--over");
+        });
+        
+        ["dragleave", "dragend"].forEach((type) => {
+          dropZoneElement.addEventListener(type, (e) => {
+            dropZoneElement.classList.remove("dropzone--over");
+          });
+        });
+        
+        dropZoneElement.addEventListener("drop", (e) => {
+          e.preventDefault();
+        
+          if (e.dataTransfer.files.length) {
+            inputElement.files = e.dataTransfer.files;
+        
+            updateDropzoneFileList(dropZoneElement, e.dataTransfer.files[0]);
+          }
+        
+          dropZoneElement.classList.remove("dropzone--over");
+        });
+        
+        const updateDropzoneFileList = (dropzoneElement, file) => {
+          let dropzoneFileMessage = dropzoneElement.querySelector(".message");
+        
+          dropzoneFileMessage.innerHTML = `
+                ${file.name}, ${file.size} bytes
+            `;
+        };
+        
+        dropzoneBox.addEventListener("reset", (e) => {
+          let dropzoneFileMessage = dropZoneElement.querySelector(".message");
+        
+          dropzoneFileMessage.innerHTML = `No Files Selected`;
+        });
+        
+        dropzoneBox.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const myFiled = document.getElementById("upload-file");
+          console.log(myFiled.files[0]);
+        });
+        </script>
+</body>
+</html>

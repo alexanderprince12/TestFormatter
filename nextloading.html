@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flipping Loader - GevStack</title>
+    <style>html, body {
+        padding: 0;
+        height: 100%;
+        display: table;
+        margin: 0 auto;
+        font-size: 52px;
+        font-family: Monaco, Consolas, "Lucida Console", monospace;
+        background-color: #012501;
+        background-image: url("http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/kindajean.png");
+    }
+    
+    .loading {
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        text-shadow: grey 1px 1px 1px;
+    }
+    
+    .letter {
+        float: left;
+        width: 35px;
+        height: 60px;
+        position: relative;
+        -webkit-animation: flip 2s infinite;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition: -webkit-transform 1s;
+    }
+    
+    .letter div {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        -webkit-transform: translate(0);
+        -webkit-backface-visibility: hidden;
+        -webkit-animation: color 8s infinite;
+    }
+    
+    .letter div.back { -webkit-transform: rotateY(180deg); }
+    
+    .letter:nth-child(1), .letter:nth-child(1) div { -webkit-animation-delay: 0.125s; }
+    .letter:nth-child(2), .letter:nth-child(2) div { -webkit-animation-delay: 0.25s; }
+    .letter:nth-child(3), .letter:nth-child(3) div { -webkit-animation-delay: 0.375s; }
+    .letter:nth-child(4), .letter:nth-child(4) div { -webkit-animation-delay: 0.5s; }
+    .letter:nth-child(5), .letter:nth-child(5) div { -webkit-animation-delay: 0.625s; }
+    .letter:nth-child(6), .letter:nth-child(6) div { -webkit-animation-delay: 0.75s; }
+    .letter:nth-child(7), .letter:nth-child(7) div { -webkit-animation-delay: 0.875s; }
+    .letter:nth-child(8), .letter:nth-child(8) div { -webkit-animation-delay: 1s; }
+    .letter:nth-child(9), .letter:nth-child(9) div { -webkit-animation-delay: 1.125s; }
+    .letter:nth-child(10), .letter:nth-child(10) div { -webkit-animation-delay: 1.25s; }
+    
+    @-webkit-keyframes flip {
+        0% { -webkit-transform: rotateY(0deg) translate(0); }
+        40%, 100% { -webkit-transform: rotateY(180deg) translate(0); }
+    }
+    
+    @-webkit-keyframes color {
+        0% { color: #88E488; }
+        25% { color: #EEADB7; }
+        50% { color: #90C9DB; }
+        75% { color: #F3B034; }
+        100% { color: #828282; }
+    }</style>
+  </head>
+  <body>
+    <div class="loading">
+        <div class="letter">
+            <div>L</div>
+            <div class="back">L</div>
+        </div>
+        <div class="letter">
+            <div>o</div>
+            <div class="back">o</div>
+        </div>
+        <div class="letter">
+            <div>a</div>
+            <div class="back">a</div>
+        </div>
+        <div class="letter">
+            <div>d</div>
+            <div class="back">d</div>
+        </div>
+        <div class="letter">
+            <div>i</div>
+            <div class="back">i</div>
+        </div>
+        <div class="letter">
+            <div>n</div>
+            <div class="back">n</div>
+        </div>
+        <div class="letter">
+            <div>g</div>
+            <div class="back">g</div>
+        </div>
+        <div class="letter dot">
+            <div>.</div>
+            <div class="back">.</div>
+        </div>
+        <div class="letter dot">
+            <div>.</div>
+            <div class="back">.</div>
+        </div>
+        <div class="letter dot">
+            <div>.</div>
+            <div class="back">.</div>
+        </div>
+    </div>
+    <!DOCTYPE html>
+    <script>
+        // After 3 seconds, redirect to another page
+        setTimeout(function() {
+            window.location.href = "newpage.html";
+        }, 3000);
+    </script>
+</body>
+</html>
+
+  </body>
+</html>

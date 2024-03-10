@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizify - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Quizify</a>
+            <ul class="nav-links">
+                <li><a href="#" class="active">HOME</a></li>
+                <li><a href="#">CONTACT US</a></li>
+                <!-- Include the "taken" parameter in the SOCIAL SPACE link -->
+                <li><a href="socialspace.html?taken=Default%20Value">SOCIAL SPACE</a></li>
+
+                <li class="dropdown">
+                    <a href="#">CREATE A QUIZ</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html">Automatic</a></li>
+                        <li><a href="quiz custom\index.html">On your OWN</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Discover Your Knowledge</h1>
+            <p>Take quizzes on various topics and challenge yourself!</p>
+            <a href="#" class="btn">Start Quiz</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <div class="feature-box">
+                <h2>Engaging Quizzes</h2>
+                <p>Explore a wide range of quizzes designed to keep you engaged and entertained.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Instant Feedback</h2>
+                <p>Receive instant feedback on your quiz performance and track your progress.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Compete with Friends</h2>
+                <p>Challenge your friends and see who scores the highest!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <!-- Add an id to the paragraph where you want to display the "taken" parameter -->
+            <p id="taken-parameter">&copy; 2024 Quizify. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Add a script section for JavaScript -->
+        <script>
+        // Function to parse query parameters from the URL
+        function getQueryParameters() {
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            return urlParams;
+        }
+
+        // Function to update the "taken" parameter in the SOCIAL SPACE link and the footer
+        function updateTakenParameter() {
+            console.log('Updating taken parameter...');
+            var urlParams = getQueryParameters();
+            var takenValue = urlParams.get('taken');
+
+            // Update the "taken" parameter in the SOCIAL SPACE link
+            var socialSpaceLink = document.querySelector('nav .nav-links li a[href*="socialspace.html"]');
+            console.log('Social Space Link:', socialSpaceLink);
+            if (socialSpaceLink) {
+                socialSpaceLink.href = "socialspace.html?taken=" + encodeURIComponent(takenValue || "Default Value");
+                console.log('Updated SOCIAL SPACE link:', socialSpaceLink.href);
+            }
+
+            // Update the HTML element in the footer with the "taken" parameter value or set to default
+            var takenParameterElement = document.getElementById("taken-parameter");
+            if (takenParameterElement) {
+                takenParameterElement.textContent = takenValue || "Default Value";
+                console.log('Updated taken parameter in the footer:', takenParameterElement.textContent);
+            }
+        }
+
+        // Call the function to update the "taken" parameter on page load
+        window.onload = updateTakenParameter;
+    </script>
+</body>
+</html>

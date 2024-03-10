@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Chat Room</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+	background-image: url('background.jpeg');
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #chat-container {
+      width: 600px; /* Adjust the width as needed */
+      margin: 20px auto;
+    }
+    #chat-box {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      overflow-y: scroll;
+      height: 400px; /* Adjust the height as needed */
+    }
+    #message-input {
+      width: 300px;
+      margin-top: 10px;
+    }
+    #send-button {
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* Style for admin and staff messages (left side) */
+    .admin-message, .staff-message {
+      text-align: left;
+      color: #0066cc; /* Adjust the color as needed */
+      font-weight: bold;
+    }
+
+    /* Style for other messages (right side) */
+    .user-message {
+      text-align: right;
+      color: red; /* Adjust the color as needed */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button id="send-button" onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    // Get the username and "taken" parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const taken = urlParams.get('taken');
+    console.log('Raw URL Parameters:', urlParams.toString());
+
+    // Use 'Guest' as default if taken parameter is not available or empty
+    const displayUsername = taken && taken.trim() !== '' ? taken.trim() : 'Guest';
+    console.log('Display Username:', displayUsername);
+
+    // Display the username and "taken" parameter in the page
+    var chatBox = document.getElementById("chat-box");
+    var usernameElement = document.createElement("div");
+    usernameElement.textContent = "You are logged in as: " + displayUsername;
+    chatBox.appendChild(usernameElement);
+
+    // Load previous messages from chat.txt
+    function loadPreviousMessages() {
+      const storedMessages = localStorage.getItem('chatMessages');
+      if (storedMessages) {
+        const messages = JSON.parse(storedMessages);
+        messages.forEach(message => displayMessage(message));
+      }
+    }
+
+    // Display a chat message
+    function displayMessage(message) {
+      var messageElement = document.createElement("div");
+
+      // Apply different classes based on the message sender
+      if (message.sender === 'admin' || message.sender === 'staff') {
+        messageElement.classList.add('admin-message');
+      } else {
+        messageElement.classList.add('user-message');
+      }
+
+      messageElement.textContent = message.username + ": " + message.text;
+      chatBox.appendChild(messageElement);
+    }
+
+    // Save a chat message to chat.txt
+    function saveMessage(message) {
+      const storedMessages = localStorage.getItem('chatMessages');
+      const messages = storedMessages ? JSON.parse(storedMessages) : [];
+      messages.push(message);
+      localStorage.setItem('chatMessages', JSON.stringify(messages));
+    }
+
+    // Function to send a message
+    function sendMessage() {
+      var messageInput = document.getElementById("message-input");
+      var messageText = messageInput.value.trim();
+
+      if (messageText !== "") {
+        // Create a message object
+        const message = {
+          username: displayUsername,
+          text: messageText,
+          sender: displayUsername.toLowerCase(), // Use lower case for comparison
+        };
+
+        // Display the message
+        displayMessage(message);
+
+        // Save the message to chat.txt
+        saveMessage(message);
+
+        // Clear the input field after sending the message
+        messageInput.value = "";
+
+        // Scroll to the bottom of the chat box
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    // Load previous messages on page load
+    window.onload = loadPreviousMessages;
+  </script>
+</body>
+</html>

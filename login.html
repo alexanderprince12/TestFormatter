@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            background-color: #3498db;
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .form-container {
+            background: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: inline-block;
+            width: 240px;
+            margin-right: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        input {
+            width: 90%;
+            padding: 5px;
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .form-container {
+                max-width: 90%;
+            }
+        }
+    </style>
+    <script>
+        function updateFormActionAndSubmit() {
+            var username = document.getElementById("username").value;
+            var form = document.getElementById("loginForm");
+
+            // Update the form action with the username parameter
+            form.action = "index1.html?taken=" + encodeURIComponent(username);
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="video23.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="form-container">
+        <h2><center>Login</center></h2>
+        <form id="loginForm" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <button type="button" onclick="updateFormActionAndSubmit();">Login</button>
+        </form>
+    </div>
+</body>
+</html>
